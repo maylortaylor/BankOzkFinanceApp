@@ -51,7 +51,7 @@ using IdentityServer4.Quickstart.UI;
             WriteLiteral("\r\n<div class=\"page-header\">\r\n    <h1>\r\n        User Code\r\n    </h1>\r\n    <p>\r\n        Please enter the code displayed on your device\r\n    </p>\r\n    ");
             EndContext();
             BeginContext(163, 169, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d218dc1e707e4b69ba89edcef00ae887", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f60dbe8e4a7f4ff687ea221d65d84c7d", async() => {
                 BeginContext(212, 113, true);
                 WriteLiteral("\r\n        <input for=\"userCode\" name=\"userCode\" />\r\n        <button class=\"btn btn-primary\">Submit</button>\r\n    ");
                 EndContext();

@@ -5,7 +5,6 @@ Z:\_Dev\Personal\BankOzkFinanceApp\App.IdentityServer\bin\Debug\netcoreapp2.1\Ap
 Z:\_Dev\Personal\BankOzkFinanceApp\App.IdentityServer\bin\Debug\netcoreapp2.1\App.IdentityServer.pdb
 Z:\_Dev\Personal\BankOzkFinanceApp\App.IdentityServer\bin\Debug\netcoreapp2.1\App.IdentityServer.Views.dll
 Z:\_Dev\Personal\BankOzkFinanceApp\App.IdentityServer\bin\Debug\netcoreapp2.1\App.IdentityServer.Views.pdb
-Z:\_Dev\Personal\BankOzkFinanceApp\App.IdentityServer\obj\Debug\netcoreapp2.1\App.IdentityServer.csprojAssemblyReference.cache
 Z:\_Dev\Personal\BankOzkFinanceApp\App.IdentityServer\obj\Debug\netcoreapp2.1\App.IdentityServer.csproj.CoreCompileInputs.cache
 Z:\_Dev\Personal\BankOzkFinanceApp\App.IdentityServer\obj\Debug\netcoreapp2.1\App.IdentityServer.RazorAssemblyInfo.cache
 Z:\_Dev\Personal\BankOzkFinanceApp\App.IdentityServer\obj\Debug\netcoreapp2.1\App.IdentityServer.RazorAssemblyInfo.cs

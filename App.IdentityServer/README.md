@@ -2,16 +2,6 @@
 
 This project is for serving up the .NetCore IdentityServer 4. This will handle all Authentication and Authorization.
 
-## Swagger
-
-This project uses Swashbuckle's Swagger to give a better look at the APIs available.
-
-To view the Swagger UI, go to:
-
-```
-http://localhost:5000/swagger
-```
-
 ## Installing
 
 Make sure your command prompt is in the `./App.IdentityServer/` folder.
@@ -26,6 +16,18 @@ dotnet run
 ```
 
 This should start the server at `http://localhost:5000/`
+
+
+## Swagger
+
+This project uses Swashbuckle's Swagger to give a better look at the APIs available.
+
+To view the Swagger UI, go to:
+
+```
+http://localhost:5000/swagger
+```
+
 
 ## Admin UI
 
