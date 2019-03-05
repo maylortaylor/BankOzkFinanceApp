@@ -21,11 +21,12 @@ namespace App.Web.Providers
         private void Initialize(int quantity)
         {
             var rng = new Random();
+            var _targetAmount = rng.Next(1000, 9000);
             SavingsGoals = Enumerable.Range(1, quantity).Select(index => new SavingsGoal
             {
                 CreatedAt = DateTime.Now.AddDays(index).ToString("d"),
-                TargetAmount = rng.Next(1000, 9000),
-                AmountSaved = rng.Next(300, 8400),
+                TargetAmount = _targetAmount,
+                AmountSaved = rng.Next(100, _targetAmount),
                 Title = titles[rng.Next(titles.Length)]
             }).ToList();
         }

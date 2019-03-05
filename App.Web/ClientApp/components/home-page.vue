@@ -13,28 +13,32 @@
       </h1>
     </div>
     <template v-if="savingsGoals">
-      <table class="table">
-        <thead class="bg-dark text-white">
-          <tr>
-            <th>Title</th>
-            <th>Target Amount</th>
-            <th>Amount Saved</th>
-            <th>Date Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            :class="index % 2 == 0 ? 'bg-white' : 'bg-light'"
-            v-for="(savingsGoal, index) in savingsGoals"
-            :key="index"
-          >
-            <td>{{ savingsGoal.title }}</td>
-            <td>{{ savingsGoal.targetAmount }}</td>
-            <td>{{ savingsGoal.amountSaved }}</td>
-            <td>{{ savingsGoal.createdAt }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <b-list-group>
+        <b-list-group-item
+          :class="index % 2 == 0 ? 'bg-white' : 'bg-light'"
+          v-for="(savingsGoal, index) in savingsGoals"
+          :key="index"
+        >
+          <b-badge variant="primary" pill>{{savingsGoal.createdAt}}</b-badge>
+          <br>
+          <h3>
+            <strong>{{ savingsGoal.title }}</strong>
+          </h3>
+          <h6>Target Amount:</h6>
+          {{ savingsGoal.targetAmount }}
+          <h6>Amount Saved:</h6>
+          {{ savingsGoal.amountSaved }}
+          <br>
+          <b-progress
+            variant="success"
+            :value="savingsGoal.amountSaved"
+            :max="savingsGoal.targetAmount"
+            show-progress
+            animated
+          />
+        </b-list-group-item>
+      </b-list-group>
+
       <nav aria-label="...">
         <ul class="pagination justify-content-center">
           <li :class="'page-item' + (currentPage == 1 ? ' disabled' : '')">
@@ -67,8 +71,10 @@ export default {
     return {
       savingsGoals: null,
       total: 0,
-      pageSize: 5,
-      currentPage: 1
+      pageSize: 3,
+      currentPage: 1,
+      counter: 45,
+      max: 9000
     };
   },
   methods: {
@@ -78,9 +84,14 @@ export default {
       this.currentPage = page;
 
       try {
-        let response = await this.$http.get(`/api/sampleData/savingsGoals`);
+        var from = (page - 1) * this.pageSize;
+        var to = from + this.pageSize;
+        let response = await this.$http.get(
+          `/api/sampleData/savingsGoals?from=${from}&to=${to}`
+        );
         console.log(response.data.savingsGoals);
         this.savingsGoals = response.data.savingsGoals;
+        this.couter = 3000;
         this.total = response.data.total;
       } catch (err) {
         window.alert(err);
