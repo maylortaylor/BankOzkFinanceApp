@@ -18,6 +18,7 @@
           <input
             v-model="editingSavingsGoal.targetAmount"
             ref="targetAmount"
+            type="number"
             placeholder="Target Amount"
           >
         </div>
@@ -26,6 +27,7 @@
           <input
             v-model="editingSavingsGoal.amountSaved"
             ref="amountSaved"
+            type="number"
             placeholder="Amout Already Saved"
           >
         </div>

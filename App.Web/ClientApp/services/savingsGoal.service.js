@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-con
 
 export default {
     getSampleData(from, to) {
@@ -8,7 +7,8 @@ export default {
     },
     getSavingsGoals() {
         return Promise.resolve().then(function () {
-            return localStorage.getItem();
+            var parsed = JSON.parse(localStorage.getItem());
+            return parsed;
         })
     },
     deleteSavingsGoal(sGoal) {
@@ -20,14 +20,14 @@ export default {
         var t = sGoal.title;
         var o = JSON.stringify(sGoal);
         return Promise.resolve().then(function () {
-            localStorage.setItem(t, o);
+            localStorage.setItem('goals', o);
         });
     },
     updateSavingsGoal(sGoal) {
         var t = sGoal.title;
         var o = JSON.stringify(sGoal);
         return Promise.resolve().then(function () {
-            localStorage.setItem(t, o);
+            localStorage.setItem('goals', o);
         });
     }
 };

@@ -101,14 +101,15 @@ export default {
       // ES2017 async/await syntax via babel-plugin-transform-async-to-generator
       // TypeScript can also transpile async/await down to ES5
       this.currentPage = page;
+      this.savingsGoals = [];
 
       try {
         var from = (page - 1) * this.pageSize;
         var to = from + this.pageSize;
-        return sGoalService.getSampleData(from, to).then(response => {
-          this.savingsGoals = response.data.savingsGoals;
-          this.total = response.data.total;
-        });
+        // return sGoalService.getSampleData(from, to).then(response => {
+        //   this.savingsGoals = response.data.savingsGoals;
+        //   this.total = response.data.total;
+        // });
       } catch (err) {
         window.alert(err);
         console.log(err);
@@ -131,9 +132,9 @@ export default {
       const sGoal = arg.savingsGoal;
       console.log("savings goal changed", sGoal);
       if (arg.mode === "add") {
-        sGoalService
-          .addSavingsGoal(sGoal)
-          .then(() => this.savingsGoal.push(sGoal));
+        sGoalService.addSavingsGoal(sGoal).then(() => {
+          this.savingsGoal.push(sGoal);
+        });
       } else {
         sGoalService.updateSavingsGoal(sGoal).then(() => {
           const index = this.savingsGoal.findIndex(
@@ -144,7 +145,7 @@ export default {
       }
     },
     deleteSavingsGoal(sGoal) {
-      return sGoalService.deleteHero(sGoal).then(() => {
+      return sGoalService.deleteSavingsGoal(sGoal).then(() => {
         this.savingsGoals = this.savingsGoals.filter(h => h !== sGoal);
         if (this.selectedSavingsGoal === sGoal) {
           this.selectedSavingsGoal = null;
