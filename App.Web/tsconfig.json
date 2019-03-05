@@ -8,10 +8,20 @@
     "sourceMap": true,
     "skipDefaultLibCheck": true,
     "strict": true,
-    "types": ["webpack-env"]
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "types": [
+      "webpack-env"
+    ],
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "strictPropertyInitialization": false,
+    "strictFunctionTypes": false
   },
   "exclude": [
-      "bin",
-      "node_modules"
+    "bin",
+    "node_modules"
   ]
 }

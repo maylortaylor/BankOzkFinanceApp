@@ -1,0 +1,44 @@
+<template>
+    <div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="small-12 text-center">
+                    <h4>Savings Goals</h4>
+                    <p>(Click to Edit)</p>
+                </div>
+            </div>
+            <div class="small-12 medium-7 columns">
+                <div class="card">
+                    <div class="card-section">
+                        <div class="row expanded">
+                            <div class="small-12 columns">
+                                <ul class="list-group">
+                                    <li class="list-group-item" v-for="item in savingsGoals">
+                                        <router-link :to="{ name: 'upsert', params: { title: item.title }}"
+                                            class="list-group-item">
+                                            <span class="badge">{{ item.createdAt }}</span>
+
+                                            <h4 class="list-group-item-heading">
+                                                {{ item.title }}
+                                            </h4>
+                                            <p class="list-group-item-text">
+                                                Target Amount: {{ item.targetAmount }}
+                                            </p>
+                                            <p class="list-group-item-text">
+                                                Amount Saved: {{ item.amountSaved }}
+                                            </p>
+                                        </router-link>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</template>
+
+<script src="./savingsGoalList.ts"></script>
