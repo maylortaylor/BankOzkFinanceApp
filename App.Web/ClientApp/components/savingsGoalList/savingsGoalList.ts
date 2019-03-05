@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import SavingsGoal from '../../models/savingsGoal.model';
+import SavingsGoalUpsertComponent from '../savingsGoalUpsert/savingsGoalUpsert';
 
 @Component({
-
+    components: { SavingsGoalUpsertComponent }
 })
 export default class SavingsGoalListComponent extends Vue {
 

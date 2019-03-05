@@ -6,12 +6,17 @@ import SavingsGoal from '../../models/savingsGoal.model';
     props: ["title"]
 })
 export default class SavingsGoalUpsertComponent extends Vue {
-    title: string;
-    amountSaved: number;
-    targetAmount: number;
+    @Prop() savingsGoal: SavingsGoal;
+    addingGoal = !this.savingsGoal;
+    editingGoal: SavingsGoal | null;
+
+    constructor() {
+        super();
+
+    }
     mounted() {
         console.log('mounted');
-        console.log(this.$route.params.title);
+
     }
     create() {
         console.log(this.$data);
