@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.Web
 {
@@ -28,6 +29,8 @@ namespace App.Web
             {
                 c.SwaggerDoc("v1", new Info { Title = "BankOZKFinanceApp API", Version = "v1" });
             });
+            services.AddSingleton<Providers.ISavingsGoalProvider, Providers.SavingsGoalProviderFake>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,15 +39,18 @@ namespace App.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                // Webpack initialization with hot-reload.
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
-                    HotModuleReplacement = true
+                    HotModuleReplacement = true,
                 });
 
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "BankOZKFinanceApp V1");
                 });
+
+
             }
             else
             {
@@ -52,7 +58,6 @@ namespace App.Web
             }
 
             app.UseStaticFiles();
-
             app.UseSwagger();
 
             app.UseMvc(routes =>

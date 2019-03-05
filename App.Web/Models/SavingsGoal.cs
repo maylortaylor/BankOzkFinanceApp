@@ -1,4 +1,4 @@
-namespace App.Web
+namespace App.Web.Models
 {
     public class SavingsGoal : BaseModel
     {
