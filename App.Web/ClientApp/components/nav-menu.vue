@@ -103,7 +103,8 @@ export default {
       const sGoal = arg.savingsGoal;
       console.log("savings goal changed", sGoal);
       if (arg.mode === "add") {
-        sGoalService.addSavingsGoal(sGoal);
+        var existingGoals = sGoalService.addSavingsGoal(sGoal);
+        this.savingsGoals = existingGoals;
       } else {
         sGoalService.updateSavingsGoal(sGoal).then(() => {
           const index = this.savingsGoal.findIndex(

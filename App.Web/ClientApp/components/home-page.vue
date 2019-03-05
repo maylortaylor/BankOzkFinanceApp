@@ -87,6 +87,7 @@ export default {
     async loadPage(page) {
       console.log("home page loaded");
       this.eventHub.$on("refreshed-data", this.addDataFromRefreshEvent);
+      this.eventHub.$on("updated-goal-list", this.updatedGoalList);
       this.currentPage = page;
       this.savingsGoals = [];
 
@@ -102,6 +103,9 @@ export default {
         window.alert(err);
         console.log(err);
       }
+    },
+    updatedGoalList(updatedGoals) {
+      this.savingsGoals = updatedGoals;
     },
     addDataFromRefreshEvent(resp) {
       console.log("refresh event", resp);

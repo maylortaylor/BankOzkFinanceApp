@@ -3,7 +3,7 @@
 export default {
   getItem(key) {
     return Promise.resolve().then(function () {
-      return localStorage.getItem(key == null ? null : key);
+      return JSON.parse(localStorage.getItem(key == null ? null : key));
     })
   },
   setItem(key, value) {

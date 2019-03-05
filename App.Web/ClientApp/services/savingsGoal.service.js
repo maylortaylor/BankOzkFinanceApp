@@ -1,5 +1,6 @@
 import axios from 'axios';
 import LocalStorage from './localStorage.service';
+const LOCAL_STORAGE_KEY = 'goals:savings';
 
 export default {
   getSampleData(from, to) {
@@ -16,23 +17,25 @@ export default {
     var t = sGoal.id;
     var o = JSON.stringify(sGoal);
     var existingGoals = [];
-    this.getSavingsGoals().then((r) => {
-      console.log('1st then', r);
-
+    this.getSavingsGoals(LOCAL_STORAGE_KEY).then((r) => {
       this.existingGoals = r;
-      console.log('existing', this.existingGoals);
+      console.log('existing goals', this.existingGoals);
       return this.existingGoals;
     }).then((r) => {
       console.log('2nd then', r);
+      if (!this.existingGoals) {
+        this.existingGoals = [];
+      }
       this.existingGoals.push(o);
-      LocalStorage.setItem('goals', this.existingGoals);
+      LocalStorage.setItem(LOCAL_STORAGE_KEY, this.existingGoals);
+      return this.existingGoals;
     });
   },
   updateSavingsGoal(sGoal) {
     var t = sGoal.title;
     var o = JSON.stringify(sGoal);
     return Promise.resolve().then(function () {
-      LocalStorage.setItem('goals', o);
+      LocalStorage.setItem(LOCAL_STORAGE_KEY, o);
     });
   }
 };
