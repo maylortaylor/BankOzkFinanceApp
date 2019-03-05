@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const api = 'api';
+con
 
 export default {
     getSampleData(from, to) {
-        return axios.get(`${api}/sampleData/savingsGoals?from=${from}&to=${to}`);
+        return axios.get(`api/sampleData/savingsGoals?from=${from}&to=${to}`);
     },
     getSavingsGoals() {
         return Promise.resolve().then(function () {
@@ -17,13 +17,17 @@ export default {
         });
     },
     addSavingsGoal(sGoal) {
+        var t = sGoal.title;
+        var o = JSON.stringify(sGoal);
         return Promise.resolve().then(function () {
-            localStorage.setItem(sGoal.title, sGoal);
+            localStorage.setItem(t, o);
         });
     },
     updateSavingsGoal(sGoal) {
+        var t = sGoal.title;
+        var o = JSON.stringify(sGoal);
         return Promise.resolve().then(function () {
-            localStorage.setItem(sGoal.title, sGoal);
+            localStorage.setItem(t, o);
         });
     }
 };

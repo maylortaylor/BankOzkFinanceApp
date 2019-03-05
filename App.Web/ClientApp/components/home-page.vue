@@ -133,13 +133,13 @@ export default {
       if (arg.mode === "add") {
         sGoalService
           .addSavingsGoal(sGoal)
-          .then(() => this.sGoalService.push(sGoal));
+          .then(() => this.savingsGoal.push(sGoal));
       } else {
         sGoalService.updateSavingsGoal(sGoal).then(() => {
-          const index = this.sGoalService.findIndex(
+          const index = this.savingsGoal.findIndex(
             h => sGoal.title === h.title
           );
-          this.sGoalService.splice(index, 1, hero);
+          this.savingsGoal.splice(index, 1, hero);
         });
       }
     },
