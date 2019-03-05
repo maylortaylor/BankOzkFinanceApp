@@ -6,16 +6,24 @@ export default {
     getSampleData(from, to) {
         return axios.get(`${api}/sampleData/savingsGoals?from=${from}&to=${to}`);
     },
-    deleteSavingsGoal(sGoal) {
-        return axios.delete(`${api}/sampleData/${sGoal.title}`);
+    getSavingsGoals() {
+        return Promise.resolve().then(function () {
+            return localStorage.getItem();
+        })
     },
-    // getHeroes() {
-    //     return axios.get(`${api}/heroes`);
-    // },
-    // addHero(hero) {
-    //     return axios.post(`${api}/hero/`, { hero });
-    // },
-    // updateHero(hero) {
-    //     return axios.put(`${api}/hero/${hero.id}`, { hero });
-    // }
+    deleteSavingsGoal(sGoal) {
+        return Promise.resolve().then(function () {
+            localStorage.removeItem(sGoal);
+        });
+    },
+    addSavingsGoal(sGoal) {
+        return Promise.resolve().then(function () {
+            localStorage.setItem(sGoal.title, sGoal);
+        });
+    },
+    updateSavingsGoal(sGoal) {
+        return Promise.resolve().then(function () {
+            localStorage.setItem(sGoal.title, sGoal);
+        });
+    }
 };

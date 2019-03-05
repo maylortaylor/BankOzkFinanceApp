@@ -20,7 +20,7 @@
       v-if="selectedSavingsGoal || addingGoal"
       :savingsGoal="selectedSavingsGoal"
       @unselect="unselect"
-      @heroChanged="save"
+      @savingsGoalChanged="save"
     ></SavingsGoal>
 
     <template v-if="savingsGoals">
@@ -131,11 +131,15 @@ export default {
       const sGoal = arg.savingsGoal;
       console.log("savings goal changed", sGoal);
       if (arg.mode === "add") {
-        heroService.addHero(sGoal).then(() => this.heroes.push(sGoal));
+        sGoalService
+          .addSavingsGoal(sGoal)
+          .then(() => this.sGoalService.push(sGoal));
       } else {
-        heroService.updateHero(sGoal).then(() => {
-          const index = this.heroes.findIndex(h => sGoal.title === h.title);
-          this.heroes.splice(index, 1, hero);
+        sGoalService.updateSavingsGoal(sGoal).then(() => {
+          const index = this.sGoalService.findIndex(
+            h => sGoal.title === h.title
+          );
+          this.sGoalService.splice(index, 1, hero);
         });
       }
     },
@@ -149,7 +153,7 @@ export default {
       });
     },
     enableAddMode() {
-      this.addingHero = true;
+      this.addingGoal = true;
       this.selectedSavingsGoal = null;
     },
     unselect() {
