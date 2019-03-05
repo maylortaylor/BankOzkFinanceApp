@@ -20,7 +20,7 @@ namespace App.Web.Controllers
         [HttpGet("[action]")]
         public IActionResult SavingsGoals([FromQuery(Name = "from")] int from = 0, [FromQuery(Name = "to")] int to = 4)
         {
-            System.Threading.Thread.Sleep(500); // Fake latency
+            System.Threading.Thread.Sleep(1000); // Fake latency
 
             var quantity = to - from;
 

@@ -2,43 +2,45 @@
   <div class="editarea">
     <div>
       <div class="editfields">
-        <div>
-          <label>Title:</label>
-          <input
-            v-if="addingSavingsGoal"
-            type="text"
-            v-model="editingSavingsGoal.title"
-            ref="title"
-            placeholder="Title"
-          >
-          <label v-if="!addingSavingsGoal" class="value">{{editingSavingsGoal.title}}</label>
-        </div>
-        <div>
-          <label>Target Amount:</label>
-          <input
-            v-model="editingSavingsGoal.targetAmount"
-            ref="targetAmount"
-            type="number"
-            placeholder="Target Amount"
-          >
-        </div>
-        <div>
-          <label>Amount Saved:</label>
-          <input
-            v-model="editingSavingsGoal.amountSaved"
-            ref="amountSaved"
-            type="number"
-            placeholder="Amout Already Saved"
-          >
-        </div>
+        <b-form @submit="save" @reset="clear" v-if="addingSavingsGoal || editingSavingsGoal">
+          <b-form-group id="title" label="Savings Goal Title:" label-for="title">
+            <b-form-input
+              id="title"
+              autofocus
+              type="text"
+              v-model="editingSavingsGoal.title"
+              required
+              placeholder="Savings Goal Title"
+            />
+          </b-form-group>
+          <b-form-group id="targetAmount" label="Target Amount:" label-for="targetAmount">
+            <b-form-input
+              id="targetAmount"
+              type="number"
+              v-model="editingSavingsGoal.targetAmount"
+              required
+              placeholder="Target Amount"
+            />
+          </b-form-group>
+          <b-form-group id="amountSaved" label="Amount Already Saved:" label-for="amountSaved">
+            <b-form-input
+              id="amountSaved"
+              type="number"
+              v-model="editingSavingsGoal.amountSaved"
+              placeholder="Amount Already Saved"
+            />
+          </b-form-group>
+
+          <b-button type="reset" variant="outline-danger">Cancel</b-button>
+          <b-button type="submit" variant="success">Save</b-button>
+        </b-form>
       </div>
-      <button @click="clear">Cancel</button>
-      <button @click="save">Save</button>
     </div>
   </div>
 </template>
 
 <script>
+const uuidv4 = require("uuid/v4");
 export default {
   props: { savingsGoal: { type: Object } },
   data() {
@@ -52,16 +54,10 @@ export default {
       this.editingSavingsGoal = this.cloneIt();
     }
   },
-  mounted() {
-    if (this.addingSavingsGoal && this.editingSavingsGoal) {
-      this.$refs.title.focus();
-    } else {
-      this.$refs.amountSaved.focus();
-    }
-  },
+  mounted() {},
   methods: {
     addSavingsGoal() {
-      const savingGoal = this.editingSavingsGoal;
+      this.editingSavingsGoal.id = uuidv4();
       this.emitRefresh("add");
     },
     clear() {
@@ -95,7 +91,12 @@ export default {
 
 <style lang="css" scoped>
 .editarea {
+  padding-top: 10px;
   float: left;
+  width: 90%;
+}
+.form-group {
+  color: gainsboro !important;
 }
 input {
   margin: 4px;

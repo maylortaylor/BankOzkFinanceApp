@@ -24,6 +24,7 @@ namespace App.Web.Providers
             var _targetAmount = rng.Next(1000, 9000);
             SavingsGoals = Enumerable.Range(1, quantity).Select(index => new SavingsGoal
             {
+                Id = Guid.NewGuid(),
                 CreatedAt = DateTime.Now.AddDays(index).ToString("d"),
                 TargetAmount = _targetAmount,
                 AmountSaved = rng.Next(100, _targetAmount),

@@ -14,9 +14,16 @@ Vue.component('icon', FontAwesomeIcon)
 
 Vue.use(BootstrapVue)
 Vue.prototype.$http = axios
+var eventHub = new Vue();
 
 sync(store, router)
-
+Vue.mixin({
+  data: function () {
+    return {
+      eventHub: eventHub
+    }
+  }
+})
 const app = new Vue({
   store,
   router,

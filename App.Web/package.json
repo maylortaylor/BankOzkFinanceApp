@@ -16,6 +16,7 @@
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.13",
     "core-js": "^2.5.3",
+    "uuid": "^3.3.2",
     "vue": "^2.6.8",
     "vue-router": "^3.0.2",
     "vue-server-renderer": "^2.5.16",

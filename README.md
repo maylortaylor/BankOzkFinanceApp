@@ -1,5 +1,12 @@
 # Bank OZK Finance App
 
+# Getting Started
+
+1) Navigate to `App.Web` folder
+2) Run `npm install` to install packages
+3) Run `dotnet build` then `dotnet run` to start the Web Server
+
+# Assignment
 The assignment is to create an application that allows users to manage savings goals and to save money towards
 them. You can choose to create a mobile app or a web app. Your app should consist of a client
 application and a back-end REST API. The goal is to create a product. It should not be polished.

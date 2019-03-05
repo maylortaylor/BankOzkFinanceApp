@@ -1,14 +1,6 @@
 {
-  "ProjectFilePath": "z:\\_Dev\\Personal\\BankOzkFinanceApp\\App.IdentityServer\\App.IdentityServer.csproj",
+  "ProjectFilePath": "/Users/maylortaylor/Documents/_Dev/_Projects/BankOzkFinanceApp/App.IdentityServer/App.IdentityServer.csproj",
   "TargetFramework": "netcoreapp2.1",
   "TagHelpers": [],
-  "Configuration": {
-    "ConfigurationName": "MVC-2.1",
-    "LanguageVersion": "2.1",
-    "Extensions": [
-      {
-        "ExtensionName": "MVC-2.1"
-      }
-    ]
-  }
+  "Configuration": null
 }

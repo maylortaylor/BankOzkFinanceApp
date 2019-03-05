@@ -12,16 +12,6 @@
         <icon icon="spinner" pulse/>
       </h1>
     </div>
-    <div class="button-group">
-      <button @click="getSavingsGoals">Refresh</button>
-      <button @click="enableAddMode" v-if="!addingGoal && !selectedSavingsGoal">Add</button>
-    </div>
-    <SavingsGoal
-      v-if="selectedSavingsGoal || addingGoal"
-      :savingsGoal="selectedSavingsGoal"
-      @unselect="unselect"
-      @savingsGoalChanged="save"
-    ></SavingsGoal>
 
     <template v-if="savingsGoals">
       <b-list-group>
@@ -31,11 +21,13 @@
           v-for="(savingsGoal, index) in savingsGoals"
           :key="index"
         >
-          <b-badge variant="primary" pill>{{savingsGoal.createdAt}}</b-badge>
-          <br>
           <h3>
             <strong>{{ savingsGoal.title }}</strong>
           </h3>
+          <b-badge variant="primary" pill>{{savingsGoal.id}}</b-badge>
+          <br>
+          <b-badge variant="secondary" pill>{{savingsGoal.createdAt}}</b-badge>
+          <br>
           <h6>Target Amount:</h6>
           {{ savingsGoal.targetAmount }}
           <h6>Amount Saved:</h6>
@@ -74,32 +66,27 @@
 
 <script>
 import sGoalService from "../services/savingsGoal.service.js";
-import SavingsGoal from "./savings-goal";
+
 export default {
   computed: {
     totalPages: function() {
       return Math.ceil(this.total / this.pageSize);
     }
   },
-  components: {
-    SavingsGoal
-  },
   data() {
     return {
       selectedSavingsGoal: null,
-      addingGoal: false,
       savingsGoals: null,
       total: 0,
       pageSize: 3,
       currentPage: 1,
-      counter: 0,
       max: 9000
     };
   },
   methods: {
     async loadPage(page) {
-      // ES2017 async/await syntax via babel-plugin-transform-async-to-generator
-      // TypeScript can also transpile async/await down to ES5
+      console.log("home page loaded");
+      this.eventHub.$on("refreshed-data", this.addDataFromRefreshEvent);
       this.currentPage = page;
       this.savingsGoals = [];
 
@@ -107,6 +94,7 @@ export default {
         var from = (page - 1) * this.pageSize;
         var to = from + this.pageSize;
         // return sGoalService.getSampleData(from, to).then(response => {
+        //   console.log(response);
         //   this.savingsGoals = response.data.savingsGoals;
         //   this.total = response.data.total;
         // });
@@ -115,34 +103,10 @@ export default {
         console.log(err);
       }
     },
-    getSavingsGoals(page) {
-      this.currentPage = page;
-      var from = (page - 1) * this.pageSize;
-      var to = from + this.pageSize;
-
-      this.savingsGoals = [];
-      this.clear();
-
-      return sGoalService.getSampleData(from, to).then(response => {
-        this.savingsGoals = response.data.savingsGoals;
-        this.total = response.data.total;
-      });
-    },
-    save(arg) {
-      const sGoal = arg.savingsGoal;
-      console.log("savings goal changed", sGoal);
-      if (arg.mode === "add") {
-        sGoalService.addSavingsGoal(sGoal).then(() => {
-          this.savingsGoal.push(sGoal);
-        });
-      } else {
-        sGoalService.updateSavingsGoal(sGoal).then(() => {
-          const index = this.savingsGoal.findIndex(
-            h => sGoal.title === h.title
-          );
-          this.savingsGoal.splice(index, 1, hero);
-        });
-      }
+    addDataFromRefreshEvent(resp) {
+      console.log("refresh event", resp);
+      this.total = resp.data.total;
+      this.savingsGoals = resp.data.savingsGoals;
     },
     deleteSavingsGoal(sGoal) {
       return sGoalService.deleteSavingsGoal(sGoal).then(() => {
@@ -153,23 +117,11 @@ export default {
         }
       });
     },
-    enableAddMode() {
-      this.addingGoal = true;
-      this.selectedSavingsGoal = null;
-    },
-    unselect() {
-      this.addingGoal = false;
-      this.selectedSavingsGoal = null;
-    },
-    clear() {
-      this.addingGoal = false;
-      this.selectedSavingsGoal = null;
-    },
     onSelect(sGoal) {
       this.selectedSavingsGoal = sGoal;
+      this.eventHub.$emit("selected-sgoal", this.selectedSavingsGoal);
     }
   },
-
   async created() {
     this.loadPage(1);
   }
