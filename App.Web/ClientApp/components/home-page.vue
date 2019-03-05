@@ -12,9 +12,21 @@
         <icon icon="spinner" pulse/>
       </h1>
     </div>
+    <div class="button-group">
+      <button @click="getSavingsGoals">Refresh</button>
+      <button @click="enableAddMode" v-if="!addingGoal && !selectedSavingsGoal">Add</button>
+    </div>
+    <SavingsGoal
+      v-if="selectedSavingsGoal || addingGoal"
+      :savingsGoal="selectedSavingsGoal"
+      @unselect="unselect"
+      @heroChanged="save"
+    ></SavingsGoal>
+
     <template v-if="savingsGoals">
       <b-list-group>
         <b-list-group-item
+          @click="onSelect(savingsGoal)"
           :class="index % 2 == 0 ? 'bg-white' : 'bg-light'"
           v-for="(savingsGoal, index) in savingsGoals"
           :key="index"
@@ -61,19 +73,26 @@
 </template>
 
 <script>
+import sGoalService from "../services/savingsGoal.service.js";
+import SavingsGoal from "./savings-goal";
 export default {
   computed: {
     totalPages: function() {
       return Math.ceil(this.total / this.pageSize);
     }
   },
+  components: {
+    SavingsGoal
+  },
   data() {
     return {
+      selectedSavingsGoal: null,
+      addingGoal: false,
       savingsGoals: null,
       total: 0,
       pageSize: 3,
       currentPage: 1,
-      counter: 45,
+      counter: 0,
       max: 9000
     };
   },
@@ -86,17 +105,63 @@ export default {
       try {
         var from = (page - 1) * this.pageSize;
         var to = from + this.pageSize;
-        let response = await this.$http.get(
-          `/api/sampleData/savingsGoals?from=${from}&to=${to}`
-        );
-        console.log(response.data.savingsGoals);
-        this.savingsGoals = response.data.savingsGoals;
-        this.couter = 3000;
-        this.total = response.data.total;
+        return sGoalService.getSampleData(from, to).then(response => {
+          this.savingsGoals = response.data.savingsGoals;
+          this.total = response.data.total;
+        });
       } catch (err) {
         window.alert(err);
         console.log(err);
       }
+    },
+    getSavingsGoals(page) {
+      this.currentPage = page;
+      var from = (page - 1) * this.pageSize;
+      var to = from + this.pageSize;
+
+      this.savingsGoals = [];
+      this.clear();
+
+      return sGoalService.getSampleData(from, to).then(response => {
+        this.savingsGoals = response.data.savingsGoals;
+        this.total = response.data.total;
+      });
+    },
+    save(arg) {
+      const sGoal = arg.savingsGoal;
+      console.log("savings goal changed", sGoal);
+      if (arg.mode === "add") {
+        heroService.addHero(sGoal).then(() => this.heroes.push(sGoal));
+      } else {
+        heroService.updateHero(sGoal).then(() => {
+          const index = this.heroes.findIndex(h => sGoal.title === h.title);
+          this.heroes.splice(index, 1, hero);
+        });
+      }
+    },
+    deleteSavingsGoal(sGoal) {
+      return sGoalService.deleteHero(sGoal).then(() => {
+        this.savingsGoals = this.savingsGoals.filter(h => h !== sGoal);
+        if (this.selectedSavingsGoal === sGoal) {
+          this.selectedSavingsGoal = null;
+          this.clear();
+        }
+      });
+    },
+    enableAddMode() {
+      this.addingHero = true;
+      this.selectedSavingsGoal = null;
+    },
+    unselect() {
+      this.addingGoal = false;
+      this.selectedSavingsGoal = null;
+    },
+    clear() {
+      this.addingGoal = false;
+      this.selectedSavingsGoal = null;
+    },
+    onSelect(sGoal) {
+      this.selectedSavingsGoal = sGoal;
     }
   },
 
