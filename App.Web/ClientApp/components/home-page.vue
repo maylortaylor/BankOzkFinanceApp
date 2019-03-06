@@ -99,13 +99,26 @@ export default {
         //   this.savingsGoals = response.data.savingsGoals;
         //   this.total = response.data.total;
         // });
+        return sGoalService.getSavingsGoals().then(all => {
+          console.log("get all savings goals", all);
+          if (all) {
+            this.savingsGoals = all;
+            this.total = all.length;
+          }
+        });
       } catch (err) {
         window.alert(err);
         console.log(err);
       }
     },
     updatedGoalList(updatedGoals) {
-      this.savingsGoals = updatedGoals;
+      this.savingsGoals = updatedGoals.map(x => {
+        x.id = x.id;
+        x.title = x.title;
+        x.targetAmount = parseInt(x.targetAmount);
+        x.amountSaved = parseInt(x.amountSaved);
+        return x;
+      });
     },
     addDataFromRefreshEvent(resp) {
       console.log("refresh event", resp);

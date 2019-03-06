@@ -25,7 +25,7 @@ namespace App.Web.Providers
             SavingsGoals = Enumerable.Range(1, quantity).Select(index => new SavingsGoal
             {
                 Id = Guid.NewGuid(),
-                CreatedAt = DateTime.Now.AddDays(index).ToString("d"),
+                CreatedAt = DateTime.UtcNow,
                 TargetAmount = _targetAmount,
                 AmountSaved = rng.Next(100, _targetAmount),
                 Title = titles[rng.Next(titles.Length)]

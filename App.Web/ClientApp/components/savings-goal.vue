@@ -13,6 +13,14 @@
               placeholder="Savings Goal Title"
             />
           </b-form-group>
+          <b-form-group id="description" label="Savings Goal Description:" label-for="description">
+            <b-form-input
+              id="description"
+              type="text"
+              v-model="editingSavingsGoal.description"
+              placeholder="Savings Goal Description"
+            />
+          </b-form-group>
           <b-form-group id="targetAmount" label="Target Amount:" label-for="targetAmount">
             <b-form-input
               id="targetAmount"

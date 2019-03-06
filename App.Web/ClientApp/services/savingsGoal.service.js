@@ -7,7 +7,7 @@ export default {
     return axios.get(`api/sampleData/savingsGoals?from=${from}&to=${to}`);
   },
   getSavingsGoals(key) {
-    return LocalStorage.getItem(key == null ? null : key);
+    return LocalStorage.getItem(key == null ? LOCAL_STORAGE_KEY : key);
   },
   deleteSavingsGoal(sGoal) {
     return LocalStorage.removeItem(sGoal);
@@ -21,22 +21,27 @@ export default {
     return this.getSavingsGoals(LOCAL_STORAGE_KEY).then((r) => {
       this.existingGoals = r;
       console.log('existing goals', this.existingGoals);
-      return this.existingGoals;
-    }).then((r) => {
-      console.log('2nd then', r);
       if (!this.existingGoals) {
         this.existingGoals = [];
       }
-      this.existingGoals.push(o);
+      this.existingGoals.push(this.mapObject(o));
       LocalStorage.setItem(LOCAL_STORAGE_KEY, this.existingGoals);
       return this.existingGoals;
     });
   },
   updateSavingsGoal(sGoal) {
-    var t = sGoal.title;
-    var o = JSON.stringify(sGoal);
-    return Promise.resolve().then(function () {
-      LocalStorage.setItem(LOCAL_STORAGE_KEY, o);
-    });
+    LocalStorage.setItem(LOCAL_STORAGE_KEY, sGoal);
+  },
+  mapObject(obj) {
+    // Because VueBootstrap only returns strings, we need to parseInts
+    var returnObj = {};
+    returnObj.id = obj.id;
+    returnObj.title = obj.title;
+    returnObj.description = obj.description;
+    returnObj.completed = obj.completed;
+    returnObj.createdAt = obj.createdAt == null ? new Date() : obj.createdAt;
+    returnObj.targetAmount = parseInt(obj.targetAmount);
+    returnObj.amountSaved = parseInt(obj.amountSaved);
+    return returnObj;
   }
 };
