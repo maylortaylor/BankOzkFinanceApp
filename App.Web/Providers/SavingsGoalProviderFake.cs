@@ -10,6 +10,10 @@ namespace App.Web.Providers
         private readonly string[] titles = {
             "Car", "House", "Computer", "Bike", "Animal", "Condo", "TV", "Video Games"
         };
+        private readonly string[] descriptions = {
+            "Something Cool", "Something Nice", "Something Sweet", "Something Exciting",
+            "Something Odd", "Something New", "Something Fun", "Something Weird"
+        };
         private List<SavingsGoal> SavingsGoals { get; set; }
 
         public SavingsGoalProviderFake()
@@ -28,7 +32,8 @@ namespace App.Web.Providers
                 CreatedAt = DateTime.UtcNow,
                 TargetAmount = _targetAmount,
                 AmountSaved = rng.Next(100, _targetAmount),
-                Title = titles[rng.Next(titles.Length)]
+                Title = titles[rng.Next(titles.Length)],
+                Description = descriptions[rng.Next(descriptions.Length)]
             }).ToList();
         }
 
