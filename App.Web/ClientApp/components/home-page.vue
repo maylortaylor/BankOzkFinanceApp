@@ -2,7 +2,7 @@
   <div>
     <h1>Savings Goals</h1>
 
-    <p>(Data is coming from SampleDataController.cs)</p>
+    <p>Press [Refresh] to get sample data (from SampleDataController.cs)</p>
 
     <div v-if="!savingsGoals" class="text-center">
       <p>
@@ -24,6 +24,9 @@
           <h3>
             <strong>{{ savingsGoal.title }}</strong>
           </h3>
+          <h4>
+            <p>{{ savingsGoal.description }}</p>
+          </h4>
           <b-badge variant="primary" pill>{{savingsGoal.id}}</b-badge>
           <br>
           <b-badge variant="secondary" pill>{{savingsGoal.createdAt}}</b-badge>
