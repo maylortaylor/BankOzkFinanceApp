@@ -15,9 +15,10 @@ export default {
   addSavingsGoal(sGoal) {
     debugger
     var t = sGoal.id;
-    var o = JSON.stringify(sGoal);
+    // var o = JSON.stringify(sGoal);
+    var o = sGoal;
     var existingGoals = [];
-    this.getSavingsGoals(LOCAL_STORAGE_KEY).then((r) => {
+    return this.getSavingsGoals(LOCAL_STORAGE_KEY).then((r) => {
       this.existingGoals = r;
       console.log('existing goals', this.existingGoals);
       return this.existingGoals;

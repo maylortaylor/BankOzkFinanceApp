@@ -103,8 +103,10 @@ export default {
       const sGoal = arg.savingsGoal;
       console.log("savings goal changed", sGoal);
       if (arg.mode === "add") {
-        var existingGoals = sGoalService.addSavingsGoal(sGoal);
-        this.savingsGoals = existingGoals;
+        sGoalService.addSavingsGoal(sGoal).then(r => {
+          this.savingsGoals = r;
+          this.eventHub.$emit("updated-goal-list", this.savingsGoals);
+        });
       } else {
         sGoalService.updateSavingsGoal(sGoal).then(() => {
           const index = this.savingsGoal.findIndex(

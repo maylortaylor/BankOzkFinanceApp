@@ -7,9 +7,9 @@ export default {
     })
   },
   setItem(key, value) {
-    var o = JSON.stringify(value);
+    // var o = JSON.stringify(value);
     return Promise.resolve().then(function () {
-      return localStorage.setItem([key], o);
+      return localStorage.setItem([key], value);
     });
   },
   deleteItem(key) {
