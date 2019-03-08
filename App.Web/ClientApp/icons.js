@@ -9,6 +9,7 @@ library.add(
   require('@fortawesome/free-solid-svg-icons').faEnvelope,
   require('@fortawesome/free-solid-svg-icons').faGraduationCap,
   require('@fortawesome/free-solid-svg-icons').faHome,
+  require('@fortawesome/free-solid-svg-icons').faSignInAlt,
   require('@fortawesome/free-solid-svg-icons').faList,
   require('@fortawesome/free-solid-svg-icons').faSpinner,
   // Brands

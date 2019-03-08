@@ -32,14 +32,14 @@
           <b-badge variant="secondary" pill>{{savingsGoal.createdAt}}</b-badge>
           <br>
           <h6>Target Amount:</h6>
-          ${{ savingsGoal.targetAmount }}
+          {{ savingsGoal.targetAmount | currency }}
           <h6>Amount Saved:</h6>
-          ${{ savingsGoal.amountSaved }}
+          {{ savingsGoal.amountSaved | currency }}
           <br>
           <b-progress :max="savingsGoal.targetAmount" height="2rem">
             <b-progress-bar :value="savingsGoal.amountSaved" variant="success" animated>
               Progress:
-              <strong>${{ savingsGoal.amountSaved }} / ${{ savingsGoal.targetAmount }}</strong>
+              <strong>{{ savingsGoal.amountSaved | currency }} / {{ savingsGoal.targetAmount | currency }}</strong>
             </b-progress-bar>
           </b-progress>
         </b-list-group-item>
@@ -148,4 +148,7 @@ export default {
 </script>
 
 <style>
+.progress-bar {
+  color: black;
+}
 </style>

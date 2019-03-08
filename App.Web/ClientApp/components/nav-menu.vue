@@ -7,9 +7,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+
       <router-link class="navbar-brand" to="/">
         <icon :icon="['fab', 'microsoft']"/>ASP.NET Core with Vue.js 2
       </router-link>
+      <router-link
+        v-if="authenticated"
+        class="navbar-brand"
+        to="/login"
+        v-on:click.native="logout()"
+        replace
+      >Logout</router-link>
 
       <transition name="slide">
         <div :class="'collapse navbar-collapse' + (!collapsed ? ' show':'')" v-show="!collapsed">
@@ -61,6 +69,7 @@ export default {
   data() {
     return {
       routes,
+      authenticated: false,
       selectedSavingsGoal: null,
       addingGoal: false,
       savingsGoals: null,
@@ -73,10 +82,18 @@ export default {
   async created() {
     this.loadPage();
   },
+  mounted() {
+    if (!this.authenticated) {
+      this.$router.replace({ name: "login" });
+    }
+  },
   methods: {
     async loadPage() {
       console.log("nav loaded");
       this.eventHub.$on("selected-sgoal", this.onSelectedSavingsGoal);
+    },
+    logout() {
+      this.authenticated = false;
     },
     onSelectedSavingsGoal(sGoal) {
       console.log("on selected sGoal", sGoal);

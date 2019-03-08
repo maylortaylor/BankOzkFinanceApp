@@ -14,7 +14,6 @@ export default {
   },
   addSavingsGoal(sGoal) {
     debugger
-    var t = sGoal.id;
     // var o = JSON.stringify(sGoal);
     var o = sGoal;
     var existingGoals = [];
@@ -24,13 +23,17 @@ export default {
       if (!this.existingGoals) {
         this.existingGoals = [];
       }
-      this.existingGoals.push(this.mapObject(o));
+      this.existingGoals.push({ [o.id]: this.mapObject(o) });
       LocalStorage.setItem(LOCAL_STORAGE_KEY, this.existingGoals);
       return this.existingGoals;
     });
   },
   updateSavingsGoal(sGoal) {
-    LocalStorage.setItem(LOCAL_STORAGE_KEY, sGoal);
+    debugger;
+    LocalStorage.getItem(LOCAL_STORAGE_KEY).then((r) => {
+      debugger
+      LocalStorage.setItem(LOCAL_STORAGE_KEY, sGoal);
+    })
   },
   mapObject(obj) {
     // Because VueBootstrap only returns strings, we need to parseInts

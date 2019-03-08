@@ -1,5 +1,6 @@
 import HomePage from 'components/home-page'
-
+import LoginPage from 'components/login/login';
 export const routes = [
-  { name: 'home', path: '/', component: HomePage, display: 'Home', icon: 'home' },
+  { name: 'home', path: '/', component: HomePage, display: 'Home', icon: ['fas', 'home'] },
+  { name: 'login', path: '/login', component: LoginPage, display: 'Login', icon: ['fa', 'sign-in-alt'] },
 ]

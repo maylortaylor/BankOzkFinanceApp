@@ -8,11 +8,19 @@ import { FontAwesomeIcon } from './icons'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
+import VueCurrencyFilter from 'vue-currency-filter'
 // Registration of global components
-Vue.component('icon', FontAwesomeIcon)
-
-Vue.use(BootstrapVue)
+Vue.component('icon', FontAwesomeIcon);
+Vue.use(VueCurrencyFilter,
+  {
+    symbol: '$',
+    thousandsSeparator: ',',
+    fractionCount: 0,
+    fractionSeparator: '.',
+    symbolPosition: 'front',
+    symbolSpacing: true
+  });
+Vue.use(BootstrapVue);
 Vue.prototype.$http = axios
 var eventHub = new Vue();
 
