@@ -32,7 +32,7 @@
         </div>
       </transition>
 
-      <div class="action-area">
+      <div v-if="authenticated" class="action-area">
         <b-container>
           <b-row>
             <b-col>
@@ -50,7 +50,7 @@
         </b-container>
 
         <SavingsGoal
-          v-if="selectedSavingsGoal || addingGoal"
+          v-if="(selectedSavingsGoal || addingGoal)"
           :savingsGoal="selectedSavingsGoal"
           @unselect="unselect"
           @savingsGoalChanged="save"
@@ -84,6 +84,7 @@ export default {
   },
   mounted() {
     if (!this.authenticated) {
+      console.log("nav - isAuthenticated", this.authenticated);
       this.$router.replace({ name: "login" });
     }
   },

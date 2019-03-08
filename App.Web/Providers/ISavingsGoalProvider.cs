@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using App.Web.Models;
+using App.Web.Data.Entities;
 
 namespace App.Web.Providers
 {

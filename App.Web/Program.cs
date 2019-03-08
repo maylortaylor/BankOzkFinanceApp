@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using App.Web.Data;
 
 namespace App.Web
 {
@@ -14,12 +10,38 @@ namespace App.Web
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = CreateWebHostBuilder(args).Build();
+
+            // Seed DB before hosting
+            SeedDatabase(host);
+
+            // Run WebHost
+            host.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        private static void SeedDatabase(IWebHost host)
+        {
+            var scopeFactory = host.Services.GetService<IServiceScopeFactory>();
+
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetService<DbSeeder>();
+                seeder.SeedAsync().Wait();
+            }
+        }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+                .ConfigureAppConfiguration(SetupAppConfig)
+                .UseStartup<Startup>();
+
+        private static void SetupAppConfig(WebHostBuilderContext context, IConfigurationBuilder builder)
+        {
+            // removes defaults
+            builder.Sources.Clear();
+
+            builder.AddJsonFile("./config.json", false, true)
+                .AddEnvironmentVariables();
+        }
     }
 }

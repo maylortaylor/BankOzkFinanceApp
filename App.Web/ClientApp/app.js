@@ -9,6 +9,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueCurrencyFilter from 'vue-currency-filter'
+
 // Registration of global components
 Vue.component('icon', FontAwesomeIcon);
 Vue.use(VueCurrencyFilter,
@@ -24,7 +25,7 @@ Vue.use(BootstrapVue);
 Vue.prototype.$http = axios
 var eventHub = new Vue();
 
-sync(store, router)
+sync(store, router);
 Vue.mixin({
   data: function () {
     return {

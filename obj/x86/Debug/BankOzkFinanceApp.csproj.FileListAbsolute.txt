@@ -1,2 +1,2 @@
-Z:\_Dev\Personal\BankOzkFinanceApp\obj\x86\Debug\BankOzkFinanceApp.csprojAssemblyReference.cache
-Z:\_Dev\Personal\BankOzkFinanceApp\obj\x86\Debug\BankOzkFinanceApp.csproj.CoreCompileInputs.cache
+Z:/_Dev/Personal/BankOzkFinanceApp/obj/x86/Debug/BankOzkFinanceApp.csprojAssemblyReference.cache
+Z:/_Dev/Personal/BankOzkFinanceApp/obj/x86/Debug/BankOzkFinanceApp.csproj.CoreCompileInputs.cache

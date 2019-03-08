@@ -4,7 +4,11 @@
 
 1) Navigate to `App.Web` folder
 2) Run `npm install` to install packages
-3) Run `dotnet build` then `dotnet run` to start the Web Server
+3) Run `dotnet ef database update` (database migrations)
+4) Run `dotnet restore` then `dotnet run` to start the Web Server
+
+NOTE:
+Once the app is running, go to [http://localhost:5001/swagger](http://localhost:5001/swagger) to see Swagger Documentation.
 
 # Assignment
 The assignment is to create an application that allows users to manage savings goals and to save money towards

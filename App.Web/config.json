@@ -1,0 +1,19 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnectionString": "Server=localhost;Database=BankOZKFinanceApp;User=root;Password=qazwsxedcrfvtgb;"
+  },
+  "Tokens": {
+    "Key": "thebestsecret",
+    "Issuer": "BankOZKFinanceApp",
+    "Audience": "BankOZKFinanceApp"
+  },
+  "Seed": {
+    "DefaultPassword": "p@ssword"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}

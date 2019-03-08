@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using App.Web.Models;
+using App.Web.Data.Entities;
 
 namespace App.Web.Providers
 {

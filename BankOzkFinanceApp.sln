@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.IdentityServer", "App.IdentityServer\App.IdentityServer.csproj", "{1FB5DB95-9EA1-46F3-B901-DA9E8C1F88FF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Web", "App.Web\App.Web.csproj", "{C691836D-7650-4B06-9A1E-69E66C5A4C04}"
 EndProject
 Global

@@ -13,6 +13,7 @@
 
 <script>
 import NavMenu from "./nav-menu";
+import store from "../store/index.js";
 
 export default {
   components: {
@@ -28,7 +29,7 @@ export default {
   },
   mounted() {
     console.log("app mounted");
-    this.eventHub.$on("authenticated", this.isAuthenticated);
+    // this.eventHub.$on("authenticated", this.isAuthenticated);
   },
   methods: {
     setAuthenticated(status) {
